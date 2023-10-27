@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.activity4.data.Data.status
 import com.example.activity4.data.DataForm
 import com.example.activity4.data.DataSource.jenis
 import com.example.activity4.ui.theme.Activity4Theme
@@ -87,6 +88,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
     var textNama by remember { mutableStateOf("") }
     var textTlp by remember { mutableStateOf("") }
     var textEml by remember { mutableStateOf("") }
+    var textAlmt by remember { mutableStateOf("") }
 
 
     val context = LocalContext.current
@@ -127,11 +129,19 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
         onSelectionChanged = { cobaViewModel.setJenisK(it) }
 
     )
-    Text(text = )
+    OutlinedTextField(
+        value = textAlmt,
+        singleLine = true,
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.fillMaxWidth(),
+        label = { Text(text = "Email") },
+        onValueChange = {
+            textAlmt = it
+        })
     Button(
         modifier = Modifier.fillMaxWidth(),
         onClick = {
-            cobaViewModel.insertData(textNama, textTlp, dataForm.sex, textEml)
+            cobaViewModel.insertData(textNama, textTlp, dataForm.sex, textEml, textAlmt)
         }) {
         Text(
             text = stringResource(R.string.register),
@@ -143,7 +153,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
     Spacer(modifier = Modifier.height(100.dp))
     TampilHasil(
         jenisnya = cobaViewModel.namaUser,
-        statusnya = cobaViewModel.jenisKl,
+        statusnya = cobaViewModel.status,
         alamatnya = cobaViewModel.alamat,
         emailnya = cobaViewModel.email,
 
