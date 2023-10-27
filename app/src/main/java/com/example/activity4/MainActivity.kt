@@ -86,7 +86,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
 
     var textNama by remember { mutableStateOf("") }
     var textTlp by remember { mutableStateOf("") }
-    var textAlmt by remember { mutableStateOf("") }
+    var textEml by remember { mutableStateOf("") }
 
 
     val context = LocalContext.current
@@ -99,7 +99,7 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
         singleLine = true,
         shape = MaterialTheme.shapes.large,
         modifier = Modifier.fillMaxWidth(),
-        label = { Text(text = "Nama Lengkap") },
+        label = { Text(text = "Username") },
         onValueChange = {
             textNama = it
         })
@@ -109,31 +109,32 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
         singleLine = true,
         shape = MaterialTheme.shapes.large,
         modifier = Modifier.fillMaxWidth(),
-        label = { Text(text = "Nomor Telepon") },
+        label = { Text(text = "Telepon") },
         onValueChange = {
             textTlp = it
         })
     OutlinedTextField(
-        value = textAlmt,
+        value = textEml,
         singleLine = true,
         shape = MaterialTheme.shapes.large,
         modifier = Modifier.fillMaxWidth(),
-        label = { Text(text = "Alamat") },
+        label = { Text(text = "Email") },
         onValueChange = {
-            textAlmt = it
+            textEml = it
         })
     SelectJK(
         options = jenis.map { id -> context.resources.getString(id) },
         onSelectionChanged = { cobaViewModel.setJenisK(it) }
 
     )
+    Text(text = )
     Button(
         modifier = Modifier.fillMaxWidth(),
         onClick = {
-            cobaViewModel.insertData(textNama, textTlp, dataForm.sex, textAlmt)
+            cobaViewModel.insertData(textNama, textTlp, dataForm.sex, textEml)
         }) {
         Text(
-            text = stringResource(R.string.submit),
+            text = stringResource(R.string.register),
             fontSize = 16.sp
         )
 
@@ -141,10 +142,10 @@ fun TampilForm(cobaViewModel: CobaViewModel = viewModel()) {
     }
     Spacer(modifier = Modifier.height(100.dp))
     TampilHasil(
-        namanya = cobaViewModel.namaUser,
-        telponnya = cobaViewModel.noTlp,
-        jenisnya = cobaViewModel.jenisKl,
+        jenisnya = cobaViewModel.namaUser,
+        statusnya = cobaViewModel.jenisKl,
         alamatnya = cobaViewModel.alamat,
+        emailnya = cobaViewModel.email,
 
         )
 
@@ -194,20 +195,20 @@ fun TampilHasil(namanya: String, telponnya: String, jenisnya: String, alamatnya:
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            text = "Nama : " + namanya,
+            text = "Jenis Kelamin : " + jenisnya,
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
         )
         Text(
-            text = "Telepon : " + telponnya,
+            text = "Status : " + statusnya,
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
         )
 
         Text(
-            text = "Jenis Kelamin : " + jenisnya,
+            text = "Alamat : " + alamatnya,
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
         )
         Text(
-            text = "Alamat : " + alamatnya,
+            text = "Email : " + emailnya,
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
         )
 

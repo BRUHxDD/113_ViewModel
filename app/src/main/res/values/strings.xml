@@ -2,6 +2,6 @@
     <string name="app_name">Activity4</string>
     <string name="laki">Laki-Laki</string>
     <string name="wanita">Perempuan</string>
-    <string name="submit">Submit</string>
+    <string name="register">Register</string>
 
 </resources>
